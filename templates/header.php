@@ -10,7 +10,7 @@
 global $_DESIGN;
 
 if (!$_DESIGN['title']) {
-	$_DESIGN['title'] = 'OpenSpree';
+  $_DESIGN['title'] = 'OpenSpree';
 }
 
 ?>
