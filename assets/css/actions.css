@@ -1,0 +1,17 @@
+@CHARSET "ISO-8859-1";
+
+table.actions {
+  border-spacing: 5px;
+  width: 100%;
+}
+
+table.actions td {
+  padding: 10px;
+  border: 1px solid grey;
+  background-color: #EEE;
+  vertical-align: top;
+}
+
+table.actions td.workspace {
+  width: 100%;
+}

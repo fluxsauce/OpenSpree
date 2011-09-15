@@ -1,6 +1,6 @@
 # OpenSpree
 
-*OpenSpree* is an implementation of *Spree!*, a board game about looting a shopping mall.
+*OpenSpree* is an implementation of *[Spree!](http://cheapass.com/freegames/spree)*, a board game about looting a shopping mall.
 
 ## Work in progress
 
@@ -44,6 +44,6 @@ Please use the [issue tracker](https://github.com/fluxsauce/OpenSpree/issues) if
 
 ## License
 
-*Spree!* is © and ™ 1997, 2011 James Ernest and Cheapass Games: [www.cheapass.com](http://www.cheapass.com). Spree was released on 2011.09.15 under the [CC BY-NC-ND 3.0](http://creativecommons.org/licenses/by-nc-nd/3.0/) license by James Ernest.  Permission for the development of OpenSpree was given in writing from author James Ernest.
+*Spree!* is (c) and TM 1997, 2011 James Ernest and Cheapass Games: [www.cheapass.com](http://www.cheapass.com). Spree was released on 2011.09.15 under the [CC BY-NC-ND 3.0](http://creativecommons.org/licenses/by-nc-nd/3.0/) license by James Ernest.  Permission for the development of OpenSpree was given in writing from author James Ernest.
 
 *OpenSpree* is [CC BY-NC-ND 3.0](http://creativecommons.org/licenses/by-nc-nd/3.0/) by [Jon Peck](http://theconfluence.org) and [FluxSauce](http://fluxsauce.com).

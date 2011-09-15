@@ -1,0 +1,44 @@
+@CHARSET "ISO-8859-1";
+
+.msg {
+  padding: 10px 10px 10px 55px;
+  text-align: left;
+  margin-left: 0;
+  margin-right: 0;
+  margin-bottom: .5em;
+}
+
+.msg .heading {
+  font-weight: bold;
+  padding-bottom: .3em;
+}
+
+.msg.error {
+  background: url('/assets/images/messages/error_30x30.png') no-repeat scroll 10px 10px #FAE0DC;
+  border: 1px solid #D14719;
+  box-shadow: 2px 2px 3px #68240C;
+}
+
+.msg.ok {
+  background: url('/assets/images/messages/ok_30x30.png') no-repeat scroll 10px 10px #D1F6D1;
+  border: 1px solid #33CC33;
+  box-shadow: 2px 2px 3px #0F3D0F;
+}
+
+.msg.question {
+  background: url('/assets/images/messages/question_30x30.png') no-repeat scroll 10px 10px #CCCCF5;
+  border: 1px solid #0000CC;
+  box-shadow: 2px 2px 3px #000052;
+}
+
+.msg.warning {
+  background: url('/assets/images/messages/warning_30x30.png') no-repeat scroll 10px 10px #F8F8B2;
+  border: 1px solid #CCCC00;
+  box-shadow: 2px 2px 3px #3D3D00;
+}
+
+.msg.info {
+  background: url('/assets/images/messages/info_30x30.png') no-repeat scroll 10px 10px #E0CCE0;
+  border: 1px solid #660066;
+  box-shadow: 2px 2px 3px #290029;
+}

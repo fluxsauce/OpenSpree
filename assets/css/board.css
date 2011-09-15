@@ -1,0 +1,73 @@
+@CHARSET "ISO-8859-1";
+
+.board {
+  border-collapse:collapse;
+  margin-top: 1em;
+  margin-left: 5px;
+}
+
+.board td {
+  border: 1px solid black;
+  width: 70px;
+  height: 70px;
+  text-align: center;
+  padding: none;
+}
+
+.w0 {
+  border-top-width: 5px !important;
+}
+
+.w1 {
+  border-right-width: 5px !important;
+}
+
+.w2 {
+  border-bottom-width: 5px !important;
+}
+
+.w3 {
+  border-left-width: 5px !important;
+}
+
+.parking_lot {
+  background-image:url('/assets/images/pavement.png');
+  background-position:center; 
+}
+
+.parking_space {
+  background-image:url('/assets/images/oil.png');
+  background-position:center;
+}
+
+.shop {
+  background-image:url('/assets/images/wood.png');
+  background-position:center;
+}
+
+.open {
+  background-image:url('/assets/images/tile.png');
+  background-position:center;
+}
+
+.fountain {
+  background-image:url('/assets/images/water.png');
+  background-position:center;
+}
+
+.card {
+  background-color:white;
+  border:1px dotted grey;
+  font-weight:bold;
+  padding-left: .5em;
+  padding-right: .5em;
+}
+
+.hover {
+  background-color:#EBEBEB !important;
+  background-image:none;
+}
+
+.red {
+  color: red;
+}

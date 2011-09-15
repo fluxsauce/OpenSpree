@@ -1,0 +1,13 @@
+@CHARSET "ISO-8859-1";
+
+table.players {
+  width: 100%;
+  border-spacing: 5px;
+}
+
+table.players td {
+  padding-left: 10px;
+  border: 1px solid grey;
+  width: 25%;
+  background-color: #EEE;
+}

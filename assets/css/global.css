@@ -1,0 +1,57 @@
+@CHARSET "ISO-8859-1";
+
+body {
+  font-family: "Lucida Grande", Arial, sans-serif;
+  margin: 2em;
+}
+
+.rounded {
+  -moz-border-radius: .4em;
+  border-radius: .4em;
+}
+
+.shadow {
+  box-shadow: 4px 4px 5px #333333;
+}
+
+.toggle_button {
+  color: grey;
+  cursor: pointer;
+  width: 1em;
+  padding: 3px;
+  display: inline-block;
+  text-align: center;
+}
+
+#heading, #footer {
+  background: #000;
+  padding: 1em 0 1em 1em;
+  margin: 1em 0;
+}
+#heading h1 {
+  position: relative;
+  margin: 0;
+  color: #fff;
+  width: 40%;
+}
+#heading p, #footer p {
+  color: #b7b7b7;
+}
+#heading p {
+  margin: 10px 0 0;
+}
+#footer p {
+  margin-top: 0;
+  margin-bottom: .3em;
+  font-size: .8em;
+}
+#donate_to_cheapass {
+  float: right;
+  margin-right: 16px;
+  text-align: right;
+}
+
+#heading p a, #footer p a {
+  font-weight:bold;
+  color:#CCCCCC;
+}
