@@ -12,77 +12,17 @@
  */
 class OpenSpree_Square {
 
-  private $type;
-  private $coordinates;
-  private $card;
-  private $cars = array();
-  private $players = array();
-  private $walls = array(
+  private $_type;
+  private $_coordinates;
+  private $_card;
+  private $_car_colors = array();
+  private $_player_colors = array();
+  private $_walls = array(
     FALSE,
     FALSE,
     FALSE,
     FALSE,
   );
-
-  public function addCar(OpenSpree_Car $car) {
-    $this->cars[] = $car;
-  }
-
-  public function getCars() {
-    return $this->cars;
-  }
-
-  public function getWalls() {
-    return $this->walls;
-  }
-
-  public function addPlayer(OpenSpree_Player $player) {
-    $this->players[] = $player;
-  }
-
-  public function removePlayer(OpenSpree_Player $player) {
-    $new_players = array();
-    foreach ($this->players as $existing_player) {
-      if ($existing_player->getColor() != $player->getColor()) {
-        $new_players[] = $existing_player;
-      }
-    }
-    $this->players = $new_players;
-  }
-
-  public function getCar(OpenSpree_Player $player) {
-    foreach ($this->cars as $existing_car) {
-      if ($existing_car->getColor() == $player->getColor()) {
-        return $existing_car;
-      }
-    }
-  }
-
-  public function removeCar(OpenSpree_Car $car) {
-    $new_cars = array();
-    foreach ($this->cars as $existing_car) {
-      if ($existing_car->getColor() != $car->getColor()) {
-        $new_cars[] = $existing_car;
-      }
-    }
-    $this->cars = $new_cars;
-  }
-
-  public function getPlayers() {
-    return $this->players;
-  }
-
-  public function getCoordinates() {
-    return $this->coordinates;
-  }
-
-  public function getType() {
-    return $this->type;
-  }
-
-  public function getCard() {
-    return $this->card;
-  }
 
   public static $valid_types = array(
     'shop',
@@ -92,60 +32,123 @@ class OpenSpree_Square {
     'fountain',
   );
 
+  public function addCarColor($car_color) {
+    $this->_car_colors[$car_color] = $car_color;
+  }
+
+  public function getCarColors() {
+    return $this->_car_colors;
+  }
+
+  public function getWalls() {
+    return $this->_walls;
+  }
+
+  public function addPlayerColor($player_color) {
+    $this->_player_colors[$player_color] = $player_color;
+  }
+
+  public function removePlayerColor($player_color) {
+	  unset($this->_player_colors[$player_color]);
+  }
+
+  public function removeCarColor($car_color) {
+	  unset($this->_car_colors[$car_color]);
+  }
+
+  public function getPlayerColors() {
+    return $this->_player_colors;
+  }
+
+  public function getCoordinates() {
+    return $this->_coordinates;
+  }
+
+  public function getType() {
+    return $this->_type;
+  }
+
+  public function getCard() {
+    return $this->_card;
+  }
+
   public function __construct($type, $coordinates, $card = NULL, $walls = NULL) {
     if (!$this->isValidType($type)) {
       throw new Exception('Invalid square type; cannot construct square.');
     }
-    $this->type = $type;
+    $this->_type = $type;
     if (!$this->isValidCoordinates($coordinates)) {
       throw new Exception('Invalid coordinates; cannot construct square.');
     }
-    $this->coordinates = $coordinates;
+    $this->_coordinates = $coordinates;
     if (!is_null($card)) {
       if (!($card instanceof OpenSpree_Card)) {
         throw new Exception('Invalid card; cannot contruct square.');
       }
-      $this->card = $card;
+      $this->_card = $card;
     }
     if (!is_null($walls)) {
       if (!$this->isValidWalls($walls)) {
         throw new Exception('Invalid walls; cannot contruct square.');
       }
-      $this->walls = $walls;
+      $this->_walls = $walls;
     }
   }
 
   public function __toString() {
-    // return $this->type . ' (' . hexdec($this->coordinates[0]) . ', ' . hexdec($this->coordinates[1]) . ')';
-    return '(' . hexdec($this->coordinates[0]) . ', ' . hexdec($this->coordinates[1]) . ')';
+    return '(' . hexdec($this->_coordinates[0]) . ', ' . hexdec($this->_coordinates[1]) . ')';
   }
 
   public function toTableCell($board_modifier = array()) {
-    $classes = array($this->type);
-    if (TRUE == $this->walls[0]) $classes[] = 'w0';
-    if (TRUE == $this->walls[1]) $classes[] = 'w1';
-    if (TRUE == $this->walls[2]) $classes[] = 'w2';
-    if (TRUE == $this->walls[3]) $classes[] = 'w3';
+    $classes = array($this->_type);
+    if (TRUE == $this->_walls[0]) $classes[] = 'w0';
+    if (TRUE == $this->_walls[1]) $classes[] = 'w1';
+    if (TRUE == $this->_walls[2]) $classes[] = 'w2';
+    if (TRUE == $this->_walls[3]) $classes[] = 'w3';
 
-    $html = '<td id="' . $this->coordinates . '" class="' . implode(' ', $classes) . '">';
+
+    $html = '<td id="sq_' . $this->_coordinates . '" class="' . implode(' ', $classes) . '">';
     if (isset($board_modifier['moves'])) {
-      if (in_array($this->coordinates, $board_modifier['moves'])) {
-        $html .= '<div class="action">[<a href="?action=move_to&target=' . $this->coordinates . '">Move</a>]</div>';
+      if (array_key_exists($this->_coordinates, $board_modifier['moves'])) {
+        $html .= '<div class="action">';
+        $html .= '<a title="' . $this . '" href="?action=move_to&target=' . $this->_coordinates . '"><strong>Move</strong> (' . $board_modifier['moves'][$this->_coordinates] .')</a>';
+        $html .= '</div>';
       }
     }
-    if (!empty($this->cars)) {
-      foreach ($this->cars as $car) {
-        $html .= '<img src="/assets/images/car_' . $car->getColor() . '_40x30.png"/><br/>';
+    if (isset($board_modifier['drive'])) {
+      if (array_key_exists($this->_coordinates, $board_modifier['drive'])) {
+        $html .= '<div class="action">';
+        $html .= '<a title="' . $this . '" href="?action=drive&spot=' . $this->_coordinates . '"><strong>Park</strong></a>';
+        $html .= '</div>';
       }
     }
-    if (!empty($this->players)) {
-      foreach ($this->players as $player) {
-        $html .= '<img src="/assets/images/sc_' . $player->getColor() . '_30x30.png"/><br/>';
+    if (isset($board_modifier['path'])) {
+      if (array_key_exists($this->_coordinates, $board_modifier['path']) && $this->_coordinates != $board_modifier['player_coordinates']) {
+        $html .= '<div class="previous_move">&otimes;</div>';
       }
     }
+    $card_is_goal = FALSE;
+    if (isset($board_modifier['hand']) && ($this->_card instanceof OpenSpree_Card)) {
+    	foreach ($board_modifier['hand'] as $card) {
+    		if ($card->getNumber() == $this->_card->getNumber() && $card->getSuit() == $this->_card->getSuit()) {
+    			$card_is_goal = TRUE;
+    		}
+    	}
+    }
+    if (!empty($this->_car_colors)) {
+      foreach ($this->_car_colors as $car_color) {
+        $html .= '<img src="/assets/images/car_' . $car_color . '_40x21.png"/><br/>';
+      }
+    }
+    if (!empty($this->_player_colors)) {
+      foreach ($this->_player_colors as $player_color) {
+        $html .= '<img src="/assets/images/sc_' . $player_color . '_30x30.png"/><br/>';
+      }
+    }
+    // Coordinates
     $html .= '<div style="font-size:8px;">' . $this . '</div>';
-    if ($this->card instanceof OpenSpree_Card) {
-      $html .= '<span class="card">' . $this->card->toHtml() . '</span>';
+    if ($this->_card instanceof OpenSpree_Card) {
+      $html .= '<span class="card' . ($card_is_goal ? ' goal' : '') . '">' . $this->_card->toHtml() . '</span>';
     }
     $html .= '</td>';
     return $html;
@@ -192,23 +195,23 @@ class OpenSpree_Square {
   }
 
   public function toEdgeCoordinate() {
-    return OpenSpree_Square::convertCoordinateToEdge($this->coordinates);
+    return OpenSpree_Square::convertCoordinateToEdge($this->_coordinates);
   }
 
   public function toEdges() {
-    $x = hexdec($this->coordinates[0]);
-    $y = hexdec($this->coordinates[1]);
+    $x = hexdec($this->_coordinates[0]);
+    $y = hexdec($this->_coordinates[1]);
     $edges = array();
-    if (!$this->walls[0]) {
+    if (!$this->_walls[0]) {
       $edges[] = array($this->toEdgeCoordinate(), $x . 'x' . ($y - 1));
     }
-    if (!$this->walls[1]) {
+    if (!$this->_walls[1]) {
       $edges[] = array($this->toEdgeCoordinate(), ($x + 1) . 'x' .  $y);
     }
-    if (!$this->walls[2]) {
+    if (!$this->_walls[2]) {
       $edges[] = array($this->toEdgeCoordinate(), $x . 'x' .  ($y + 1));
     }
-    if (!$this->walls[3]) {
+    if (!$this->_walls[3]) {
       $edges[] = array($this->toEdgeCoordinate(), ($x - 1) . 'x' .  $y);
     }
     return $edges;

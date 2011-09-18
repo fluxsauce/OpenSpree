@@ -11,22 +11,22 @@
  * @package OpenSpree
  */
 class OpenSpree_Car {
-  private $color;
-  private $player_in_car = TRUE;
+  private $_color;
+  private $_player_in_car = FALSE;
 
   function __construct($color) {
     if (!OpenSpree_Game::isValidColor($color)) {
       throw new Exception('Invalid color; cannot construct car.');
     }
-    $this->color = $color;
+    $this->_color = $color;
   }
 
   public function getColor() {
     return $this->color;
   }
 
-  public function setPlayerInCar(boolean $player_in_car) {
-    $this->player_in_car = $player_in_car;
+  public function setPlayerInCar($player_in_car) {
+    $this->_player_in_car = $player_in_car;
   }
 
 }

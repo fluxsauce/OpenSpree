@@ -160,16 +160,16 @@ class OpenSpree_Board {
       if ($square->getCard() instanceof OpenSpree_Card) {
         $this->locations['cards'][$square->getCard()->__toString()] = $square->getCoordinates();
       }
-      $players_in_square = $square->getPlayers();
-      if (!empty($players_in_square)) {
-        foreach ($players_in_square as $player) {
-          $this->locations['players'][$player->getColor()] = $square->getCoordinates();
+      $player_colors_in_square = $square->getPlayerColors();
+      if (!empty($player_colors_in_square)) {
+        foreach ($player_colors_in_square as $player_color) {
+          $this->locations['players'][$player_color] = $square->getCoordinates();
         }
       }
-      $cars_in_square = $square->getCars();
-      if (!empty($cars_in_square)) {
-        foreach ($cars_in_square as $car) {
-          $this->locations['cars'][$car->getColor()] = $square->getCoordinates();
+      $car_colors_in_square = $square->getCarColors();
+      if (!empty($car_colors_in_square)) {
+        foreach ($car_colors_in_square as $car_color) {
+          $this->locations['cars'][$car_color] = $square->getCoordinates();
         }
       }
       $this->locations[$square->getType()][] = $square->getCoordinates();
@@ -183,9 +183,9 @@ class OpenSpree_Board {
   public function getEmptyParkingSpaces() {
     $empty_parking_spaces = array();
     foreach ($this->locations['parking_space'] as $hex_coordinates) {
-      $cars = $this->squares[$hex_coordinates]->getCars();
-      if (empty($cars)) {
-        $empty_parking_spaces[] = $this->squares[$hex_coordinates];
+      $car_colors = $this->squares[$hex_coordinates]->getCarColors();
+      if (empty($car_colors)) {
+        $empty_parking_spaces[$hex_coordinates] = $this->squares[$hex_coordinates];
       }
     }
     return $empty_parking_spaces;

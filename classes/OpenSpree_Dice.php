@@ -12,11 +12,19 @@
  */
 class OpenSpree_Dice {
   /**
-   * Roll two standard d6 dice and return the sum.
-   * @return int Sum of 2d6
+   * Roll standard d6 dice and return the sum.
+   * @return int d6
    */
   public static function roll() {
-    return (rand(1, 6) + rand(1, 6));
+    return rand(1, 6);
+  }
+
+  /**
+   * Validate a double roll.
+   * @return boolean
+   */
+  public static function isValidDoubleRoll($roll) {
+    return (($roll >= 2) && ($roll <= 12));
   }
 
   /**
@@ -24,7 +32,7 @@ class OpenSpree_Dice {
    * @return boolean
    */
   public static function isValidRoll($roll) {
-    return (($roll >= 2) && ($roll <= 12));
+    return (($roll >= 1) && ($roll <= 6));
   }
 }
 

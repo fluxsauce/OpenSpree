@@ -1,5 +1,5 @@
 /**
- * 
+ * For the fuuuuuuutre...
  */
 $(document).ready(function() {
   $('.board td').hover(

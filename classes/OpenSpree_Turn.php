@@ -12,12 +12,13 @@
  */
 class OpenSpree_Turn {
 
-  private $_player;
+  private $_player_color;
   private $_id;
   private $_initial_board_state;
   private $_initial_deck_state;
 
   private $_player_move_history = array();
+  private $_player_move_distance = 0;
   private $_player_drove = FALSE;
 
   private $_player_roll = 0;
@@ -26,15 +27,15 @@ class OpenSpree_Turn {
   private $_player_shot = FALSE;
   private $_player_earned_another_turn = FALSE;
 
-  function __construct(OpenSpree_Player $player, $id, $initial_board_state, $initial_deck_state) {
-    $this->_player = $player;
+  function __construct($player_color, $id, $initial_board_state, $initial_deck_state) {
+    $this->_player_color = $player_color;
     $this->_id = $id;
     $this->_initial_board_state = $initial_board_state;
     $this->_initial_deck_state = $initial_deck_state;
   }
 
-  public function getPlayer() {
-    return $this->_player;
+  public function getPlayerColor() {
+    return $this->_player_color;
   }
 
   public function getId() {
@@ -42,7 +43,18 @@ class OpenSpree_Turn {
   }
 
   function __toString() {
-    return 'Turn #' . $this->_id . ' - Player ' . $this->_player->getName();
+  	$debug_string = 'Turn #' . $this->_id . ', ' . $this->_player_color . ' player.';
+  	$debug_string .= ' Player ' . ($this->hasPlayerRolled() ? 'has' : 'has not') . ' rolled.';
+  	if ($this->hasPlayerRolled()) {
+  		$debug_string .= ' Player rolled ' . $this->_player_roll . ' with ' . $this->_player_roll_modifier . ' modifier.';
+  	}
+  	if ($this->_player_move_distance > 0) {
+  	  $debug_string .= ' Player move distance: ' . $this->_player_move_distance . '. ';
+  	}
+  	if (!empty($this->_player_move_history)) {
+  	  $debug_string .= ' Player move history: ' . implode(', ', $this->_player_move_history) . '.';
+  	}
+    return $debug_string;
   }
 
   public function hasPlayerMoved() {
@@ -50,7 +62,11 @@ class OpenSpree_Turn {
   }
 
   public function addPlayerMove($coordinates) {
-    $this->_player_move_history[] = $coordinates;
+  	foreach ($coordinates as $coordinate) {
+  		$this->_player_move_history[$coordinate] = $coordinate;
+  	}
+  	// Offset for initial square
+    $this->_player_move_distance += count($coordinates) - 1;
   }
 
   public function hasPlayerRolled() {
@@ -62,7 +78,8 @@ class OpenSpree_Turn {
   }
 
   public function getPlayerRemainingMoves() {
-    return ($this->_player_roll + $this->_player_roll_modifier) - count($this->_player_move_history);
+  	$remaining_move_count = ($this->_player_roll + $this->_player_roll_modifier) - $this->_player_move_distance;
+    return $remaining_move_count;
   }
 
   public function setPlayerRoll($player_roll) {
@@ -75,6 +92,18 @@ class OpenSpree_Turn {
 
   public function setPlayerRollModifier($player_roll_modifier) {
     $this->_player_roll_modifier = $player_roll_modifier;
+  }
+
+  public function getPlayerMoveHistory() {
+  	return $this->_player_move_history;
+  }
+
+  public function setPlayerDrove($boolean) {
+  	$this->_player_drove = $boolean;
+  }
+
+  public function getPlayerDrove($boolean) {
+  	return $this->_player_drove;
   }
 
 }

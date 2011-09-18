@@ -18,7 +18,7 @@ Enter you. And your infantile collection of friends.
 
 It's not enough to simply loot this mall. You have to do it with "flair." Which boils down to an allnight looting race with shopping carts, flashlights, and guns.
 
-So park your car, dash into the mall, and load up your little red wagon. You can snitch stuff out of the stores if you like, but it’s even more fun to steal it from your friends.
+So park your car, dash into the mall, and load up your little red wagon. You can snitch stuff out of the stores if you like, but it's even more fun to steal it from your friends.
 
 This explains the guns.
 

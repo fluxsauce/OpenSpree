@@ -56,11 +56,15 @@
 }
 
 .card {
-  background-color:white;
+  background-color: white;
   border:1px dotted grey;
   font-weight:bold;
   padding-left: .5em;
   padding-right: .5em;
+}
+
+.card.goal {
+  background-color: yellow;
 }
 
 .hover {
@@ -70,4 +74,14 @@
 
 .red {
   color: red;
+}
+
+.action {
+  font-size: .7em;
+  border: 1px solid green;
+  background-color: #DBFFDB;
+}
+
+.action a {
+  text-decoration: none;
 }

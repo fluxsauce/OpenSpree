@@ -1,8 +1,9 @@
 @CHARSET "ISO-8859-1";
 
 body {
-  font-family: "Lucida Grande", Arial, sans-serif;
-  margin: 2em;
+  font-family: Georgia, Verdana, Arial, serif;
+  margin: 1em;
+  background: url('/assets/images/noise_bg.png') repeat #FFF;
 }
 
 .rounded {
