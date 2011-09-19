@@ -54,14 +54,14 @@ class OpenSpree_Design {
   }
 
   public static function card(OpenSpree_Card $card) {
-  	$html = '<div class="card">';
-  	$html .= $card->toHtml();
-  	$html .= '</div>';
-  	return $html;
+    $html = '<div class="card">';
+    $html .= $card->toHtml();
+    $html .= '</div>';
+    return $html;
   }
 
   public static function playerAvatar($player_color, $knocked_down = FALSE) {
-  	return '<img height="30" width="30" src="/assets/images/sc_' . $player_color . ($knocked_down ? '_kd' : '') . '_30x30.png"/>';
+    return '<img height="30" width="30" src="/assets/images/sc_' . $player_color . ($knocked_down ? '_kd' : '') . '_30x30.png"/>';
   }
 }
 

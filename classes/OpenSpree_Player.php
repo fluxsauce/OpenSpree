@@ -36,7 +36,7 @@ class OpenSpree_Player {
   }
 
   public function getScore() {
-  	return $this->_score;
+    return $this->_score;
   }
 
   public function updateScore() {
@@ -44,7 +44,7 @@ class OpenSpree_Player {
     if (!empty($this->_safe_cards)) {
       foreach ($this->_safe_cards as $card) {
         switch ($card->getNumber()) {
-        	case '2':
+          case '2':
           case '3':
           case '4':
           case '5':

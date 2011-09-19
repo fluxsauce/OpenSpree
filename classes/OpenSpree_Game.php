@@ -76,15 +76,15 @@ class OpenSpree_Game {
       $this->drawToFive($this->_players[$current_player_color]);
       // If they did not earn another turn...
       if (!$this->_turn_current->getPlayerEarnedAnotherTurn()) {
-	      $next_player_index = $current_player_index + 1;
-	      if ($next_player_index >= count($this->_player_order)) {
-	        $next_player_index = 0;
-	      }
-	      $next_player = $this->getPlayerByColor($this->_player_order[$next_player_index]);
-	      $this->drawToFive($next_player);
+        $next_player_index = $current_player_index + 1;
+        if ($next_player_index >= count($this->_player_order)) {
+          $next_player_index = 0;
+        }
+        $next_player = $this->getPlayerByColor($this->_player_order[$next_player_index]);
+        $this->drawToFive($next_player);
       } else {
-      	// They did earn another turn!
-      	$next_player = $this->_players[$current_player_color];
+        // They did earn another turn!
+        $next_player = $this->_players[$current_player_color];
       }
       // They got knocked down, but they get up again
       $this->_players[$next_player->getColor()]->setKnockedDown(FALSE);
@@ -93,18 +93,18 @@ class OpenSpree_Game {
   }
 
   public function whoWon() {
-  	$who_scored = NULL;
-  	$highest_score = 0;
-  	foreach ($this->_players as $player) {
-  		if ($player->getScore() > $highest_score) {
-  			$highest_score = $player->getScore();
-  			$who_scored = $player;
-  		}
-  	}
-  	if ($highest_score > OpenSpree_Game::$target_scores[count($this->_players)]) {
-  		return $who_scored;
-  	}
-  	return NULL;
+    $who_scored = NULL;
+    $highest_score = 0;
+    foreach ($this->_players as $player) {
+      if ($player->getScore() > $highest_score) {
+        $highest_score = $player->getScore();
+        $who_scored = $player;
+      }
+    }
+    if ($highest_score > OpenSpree_Game::$target_scores[count($this->_players)]) {
+      return $who_scored;
+    }
+    return NULL;
   }
 
   function __construct($player_colors_and_names) {
@@ -305,8 +305,8 @@ class OpenSpree_Game {
   }
 
   public function canPlayerRob(OpenSpree_Player $robber, OpenSpree_Player $victim) {
-  	// Robber cannot rob themselves
-  	if ($robber->getColor() == $victim->getColor()) return FALSE;
+    // Robber cannot rob themselves
+    if ($robber->getColor() == $victim->getColor()) return FALSE;
     // If robber is in a car, they cannot rob
     if ($robber->isInCar()) return FALSE;
     // If victim is in a car, they cannot be robbed
@@ -323,16 +323,16 @@ class OpenSpree_Game {
     $victim_square = $this->_board->squares[$this->_board->locations['players'][$victim->getColor()]];
     // If they are in the same location, then a robbery can take place
     if ($robber_square->getCoordinates() == $victim_square->getCoordinates()) {
-    	// Actually compare the hands...
+      // Actually compare the hands...
     } else {
-    	foreach ($robber_hand as $robber_card) {
-    		foreach ($victim_cart as $victim_card) {
-    			if ($robber_card->getValue() == $victim_card->getValue()) {
-    				return TRUE;
-    			}
-    		}
-    	}
-    	return FALSE;
+      foreach ($robber_hand as $robber_card) {
+        foreach ($victim_cart as $victim_card) {
+          if ($robber_card->getValue() == $victim_card->getValue()) {
+            return TRUE;
+          }
+        }
+      }
+      return FALSE;
     }
   }
 
@@ -415,64 +415,64 @@ class OpenSpree_Game {
   }
 
   public function playerShotAttempt(OpenSpree_Player $source, OpenSpree_Player $target) {
-  	$this->_turn_current->setPlayerShot(TRUE);
-  	$source_square = $this->getPlayerCurrentSquare($source);
-  	$target_square = $this->getPlayerCurrentSquare($target);
+    $this->_turn_current->setPlayerShot(TRUE);
+    $source_square = $this->getPlayerCurrentSquare($source);
+    $target_square = $this->getPlayerCurrentSquare($target);
     $distance = OpenSpree_Square::shootableSquareDistance($source_square->getCoordinates(), $target_square->getCoordinates());
     $angle = OpenSpree_Square::calculateAngle($source_square->getCoordinates(), $target_square->getCoordinates());
     $direction = OpenSpree_Square::convertAngleToDirection($angle);
     $roll = OpenSpree_Dice::roll();
     if ($roll > $distance) {
-    	$this->_turn_current->setPlayerEarnedAnotherTurn(TRUE);
-    	$this->_players[$target->getColor()]->setKnockedDown(TRUE);
-    	// Knock them back
-    	$distance_knocked = abs($distance - $roll);
-    	$shootable_squares = $this->getShootableSquares($target_square, array(), $direction, 0, $distance_knocked);
-    	$farthest_distance = 0;
-    	$farthest_square = NULL;
-    	$knocked_back_to_square = NULL;
-    	foreach ($shootable_squares as $shootable_square) {
-    		$distance = OpenSpree_Square::shootableSquareDistance($target_square->getCoordinates(), $shootable_square->getCoordinates());
-    		if ($distance == $distance_knocked) {
-    			$knocked_back_to_square = $shootable_square;
-    		} else {
-    			if ($distance < $farthest_distance) {
-    				$knocked_back_to_square = $shootable_square;
-    				$farthest_distance = $distance;
-    			}
-    		}
-    	}
-    	if (!($knocked_back_to_square instanceof OpenSpree_Square)) {
-    		$knocked_back_to_square = $target_square;
-    	}
-    	// Fountain special case - deviation - you get to knock them over the fountain.  That's cool.
-    	if ($knocked_back_to_square->getCoordinates() == '74') {
-    		if (0 == $direction) {
-    			$knocked_back_to_square = $this->_board->squares['75'];
-    		} else if (1 == $direction) {
-    			$knocked_back_to_square = $this->_board->squares['84'];
-    		} else if (2 == $direction) {
-    			$knocked_back_to_square = $this->_board->squares['73'];
-    		} else {
-    			$knocked_back_to_square = $this->_board->squares['54'];
-    		}
-    	} else if ($knocked_back_to_square->getCoordinates() == '64') {
-    	  if (0 == $direction) {
-    			$knocked_back_to_square = $this->_board->squares['65'];
-    		} else if (1 == $direction) {
-    			$knocked_back_to_square = $this->_board->squares['84'];
-    		} else if (2 == $direction) {
-    			$knocked_back_to_square = $this->_board->squares['63'];
-    		} else {
-    			$knocked_back_to_square = $this->_board->squares['54'];
-    		}
-    	}
-    	$this->movePlayer($target, $knocked_back_to_square);
+      $this->_turn_current->setPlayerEarnedAnotherTurn(TRUE);
+      $this->_players[$target->getColor()]->setKnockedDown(TRUE);
+      // Knock them back
+      $distance_knocked = abs($distance - $roll);
+      $shootable_squares = $this->getShootableSquares($target_square, array(), $direction, 0, $distance_knocked);
+      $farthest_distance = 0;
+      $farthest_square = NULL;
+      $knocked_back_to_square = NULL;
+      foreach ($shootable_squares as $shootable_square) {
+        $distance = OpenSpree_Square::shootableSquareDistance($target_square->getCoordinates(), $shootable_square->getCoordinates());
+        if ($distance == $distance_knocked) {
+          $knocked_back_to_square = $shootable_square;
+        } else {
+          if ($distance < $farthest_distance) {
+            $knocked_back_to_square = $shootable_square;
+            $farthest_distance = $distance;
+          }
+        }
+      }
+      if (!($knocked_back_to_square instanceof OpenSpree_Square)) {
+        $knocked_back_to_square = $target_square;
+      }
+      // Fountain special case - deviation - you get to knock them over the fountain.  That's cool.
+      if ($knocked_back_to_square->getCoordinates() == '74') {
+        if (0 == $direction) {
+          $knocked_back_to_square = $this->_board->squares['75'];
+        } else if (1 == $direction) {
+          $knocked_back_to_square = $this->_board->squares['84'];
+        } else if (2 == $direction) {
+          $knocked_back_to_square = $this->_board->squares['73'];
+        } else {
+          $knocked_back_to_square = $this->_board->squares['54'];
+        }
+      } else if ($knocked_back_to_square->getCoordinates() == '64') {
+        if (0 == $direction) {
+          $knocked_back_to_square = $this->_board->squares['65'];
+        } else if (1 == $direction) {
+          $knocked_back_to_square = $this->_board->squares['84'];
+        } else if (2 == $direction) {
+          $knocked_back_to_square = $this->_board->squares['63'];
+        } else {
+          $knocked_back_to_square = $this->_board->squares['54'];
+        }
+      }
+      $this->movePlayer($target, $knocked_back_to_square);
       return TRUE;
     } else {
-    	$this->_turn_current->setPlayerEarnedAnotherTurn(FALSE);
-    	$this->_players[$source->getColor()]->setKnockedDown(TRUE);
-    	return FALSE;
+      $this->_turn_current->setPlayerEarnedAnotherTurn(FALSE);
+      $this->_players[$source->getColor()]->setKnockedDown(TRUE);
+      return FALSE;
     }
   }
 
@@ -598,7 +598,7 @@ class OpenSpree_Game {
     $turn = $this->_turn_current;
     // Special case - took a shot.  Redundant, because a new turn should start immediately.
     if ($turn->getPlayerShot()) {
-    	return array('end_turn');
+      return array('end_turn');
     }
     // Moving
     if (!$turn->hasPlayerRolled() || ($turn->hasPlayerRolled() && $turn->getPlayerRemainingMoves() > 0)) {
@@ -630,9 +630,9 @@ class OpenSpree_Game {
     // Robbing
     $can_rob = FALSE;
     foreach ($this->getPlayerCurrentSquare($player)->getPlayerColors() as $color) {
-    	if ($this->canPlayerRob($player, $this->getPlayerByColor($color))) {
-    		$can_rob = TRUE;
-    	}
+      if ($this->canPlayerRob($player, $this->getPlayerByColor($color))) {
+        $can_rob = TRUE;
+      }
     }
     if ($can_rob) $actions[] = 'rob';
     // Shooting
@@ -651,53 +651,53 @@ class OpenSpree_Game {
     $html = '';
     $action_html = array();
     foreach ($actions as $action) {
-    	$action_title = '';
-    	switch ($action) {
-    		case 'move': {
-    			$action_title = 'Move from your current square to a new square.';
-    			break;
-    		}
-    		case 'shop': {
-    			$action_title = 'Shop for a card; needs to be yellow for you to be able to pick it up.';
-    			break;
-    		}
-    		case 'stash': {
-    			$action_title = 'Stash your loot; this is how cards in your cart can be converted to score.';
-    			break;
-    		}
-    		case 'shoot': {
-    			$action_title = 'Shoot another player and knock them down (and back!).';
-    			break;
-    		}
-    		case 'end_turn': {
-    			$action_title = 'End your turn if you have nothing else you want to (or can) do.';
-    			break;
-    		}
-    		case 'move_modifier': {
-    			$action_title = 'Want to move farther?  Play a move modifier.  Jokers can be used in this way...';
-    			break;
-    		}
-    		case 'drive': {
-    			$action_title = 'Drive from your current parking spot to another open spot.';
-    			break;
-    		}
-    		case 'reset': {
-    			$action_title = 'Completely reset the game; can be considered a rage quit.';
-    			break;
-    		}
-    		case 'rob': {
-    			$action_title = 'Attempt to rob another player.';
-    			break;
-    		}
-    	}
-    	if ('reset' == $action) {
-    		$move_html = '<a style="color:red;" onclick = "if(!confirm(\'Are you sure you want to reset the game?  You will lose all progress.\')){return false;}" href="/?action=' . $action . '"' . ($action_title ? ' title="' . $action_title . '"' : '') . '>' . OpenSpree_Game::$action_definitions[$action] . '</a>';
-    	} else {
-    		$move_html = '<a href="/?action=' . $action . '"' . ($action_title ? ' title="' . $action_title . '"' : '') . '>' . OpenSpree_Game::$action_definitions[$action] . '</a>';
-    	}
+      $action_title = '';
+      switch ($action) {
+        case 'move': {
+          $action_title = 'Move from your current square to a new square.';
+          break;
+        }
+        case 'shop': {
+          $action_title = 'Shop for a card; needs to be yellow for you to be able to pick it up.';
+          break;
+        }
+        case 'stash': {
+          $action_title = 'Stash your loot; this is how cards in your cart can be converted to score.';
+          break;
+        }
+        case 'shoot': {
+          $action_title = 'Shoot another player and knock them down (and back!).';
+          break;
+        }
+        case 'end_turn': {
+          $action_title = 'End your turn if you have nothing else you want to (or can) do.';
+          break;
+        }
+        case 'move_modifier': {
+          $action_title = 'Want to move farther?  Play a move modifier.  Jokers can be used in this way...';
+          break;
+        }
+        case 'drive': {
+          $action_title = 'Drive from your current parking spot to another open spot.';
+          break;
+        }
+        case 'reset': {
+          $action_title = 'Completely reset the game; can be considered a rage quit.';
+          break;
+        }
+        case 'rob': {
+          $action_title = 'Attempt to rob another player.';
+          break;
+        }
+      }
+      if ('reset' == $action) {
+        $move_html = '<a style="color:red;" onclick = "if(!confirm(\'Are you sure you want to reset the game?  You will lose all progress.\')){return false;}" href="/?action=' . $action . '"' . ($action_title ? ' title="' . $action_title . '"' : '') . '>' . OpenSpree_Game::$action_definitions[$action] . '</a>';
+      } else {
+        $move_html = '<a href="/?action=' . $action . '"' . ($action_title ? ' title="' . $action_title . '"' : '') . '>' . OpenSpree_Game::$action_definitions[$action] . '</a>';
+      }
       if ($action == 'move') {
         if (!$this->_turn_current->hasPlayerRolled()) {
-        	// This was confusing to players.
+          // This was confusing to players.
           // $move_html .= ' (you have not rolled yet)';
         } else {
           $remaining_moves = $this->_turn_current->getPlayerRemainingMoves();
@@ -718,8 +718,8 @@ class OpenSpree_Game {
     $square->addPlayerColor($player->getColor());
     // Get out of the car
     if ($player->isInCar()) {
-    	$this->_players[$player->getColor()]->setInCar(FALSE);
-    	$this->_cars[$player->getColor()]->setPlayerInCar(FALSE);
+      $this->_players[$player->getColor()]->setInCar(FALSE);
+      $this->_cars[$player->getColor()]->setPlayerInCar(FALSE);
     }
     $this->_board->rebuildLocations();
   }

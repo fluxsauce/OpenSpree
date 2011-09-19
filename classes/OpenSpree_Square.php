@@ -149,7 +149,7 @@ class OpenSpree_Square {
     }
     if (!empty($this->_player_colors)) {
       foreach ($this->_player_colors as $player_color) {
-      	$html .= OpenSpree_Design::playerAvatar($player_color, $board_modifier['players'][$player_color]->getKnockedDown()) . '<br/>';
+        $html .= OpenSpree_Design::playerAvatar($player_color, $board_modifier['players'][$player_color]->getKnockedDown()) . '<br/>';
       }
     }
     // Coordinates - debug
@@ -212,7 +212,7 @@ class OpenSpree_Square {
     $edges = array();
     // Fountain
     if (($x == 6 || $x == 7) && $y == 4) {
-    	return $edges;
+      return $edges;
     }
     if (!$this->_walls[0] && !((6 == $x && 5 == $y) || (7 == $x && 5 == $y))) {
       $edges[] = array($this->toEdgeCoordinate(), $x . 'x' . ($y - 1));
@@ -230,7 +230,7 @@ class OpenSpree_Square {
   }
 
   public static function shootableSquareDistance($coordinate_source, $coordinate_target) {
-  	$x = hexdec($coordinate_source[0]);
+    $x = hexdec($coordinate_source[0]);
     $y = hexdec($coordinate_source[1]);
     $a = hexdec($coordinate_target[0]);
     $b = hexdec($coordinate_target[1]);
@@ -238,28 +238,28 @@ class OpenSpree_Square {
   }
 
   public static function convertAngleToDirection($angle) {
-  	switch ($angle) {
-  		case '0': {
-  			return 0;
-  			break;
-  		}
-  		case '90': {
-  			return 1;
-  			break;
-  		}
-  		case '180': {
-  			return 2;
-  			break;
-  		}
-  		case '270': {
-  			return 3;
-  			break;
-  		}
-  	}
+    switch ($angle) {
+      case '0': {
+        return 0;
+        break;
+      }
+      case '90': {
+        return 1;
+        break;
+      }
+      case '180': {
+        return 2;
+        break;
+      }
+      case '270': {
+        return 3;
+        break;
+      }
+    }
   }
 
   public static function calculateAngle($coordinate_source, $coordinate_target) {
-  	$x = hexdec($coordinate_source[0]);
+    $x = hexdec($coordinate_source[0]);
     $y = hexdec($coordinate_source[1]);
     $a = hexdec($coordinate_target[0]);
     $b = hexdec($coordinate_target[1]);

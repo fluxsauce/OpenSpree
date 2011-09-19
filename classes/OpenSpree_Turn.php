@@ -43,19 +43,19 @@ class OpenSpree_Turn {
   }
 
   public function setPlayerShot($boolean) {
-  	$this->_player_shot = $boolean;
+    $this->_player_shot = $boolean;
   }
 
   public function getPlayerShot() {
-  	return $this->_player_shot;
+    return $this->_player_shot;
   }
 
   public function setPlayerEarnedAnotherTurn($boolean) {
-  	$this->_player_earned_another_turn = $boolean;
+    $this->_player_earned_another_turn = $boolean;
   }
 
   public function getPlayerEarnedAnotherTurn() {
-  	return $this->_player_earned_another_turn;
+    return $this->_player_earned_another_turn;
   }
 
   function __toString() {
