@@ -4,6 +4,7 @@
   border-collapse:collapse;
   margin-top: 1em;
   margin-left: 5px;
+  border: 10px solid #134D00;
 }
 
 .board td {
@@ -31,36 +32,28 @@
 }
 
 .parking_lot {
-  background-image:url('/assets/images/pavement.png');
+  background-image:url('/assets/images/parking_lot_70x70.png');
   background-position:center; 
 }
 
 .parking_space {
-  background-image:url('/assets/images/oil.png');
+  background-image:url('/assets/images/parking_space_70x70.png');
   background-position:center;
 }
 
 .shop {
-  background-image:url('/assets/images/wood.png');
+  background-image:url('/assets/images/shop_70x70.png');
   background-position:center;
 }
 
 .open {
-  background-image:url('/assets/images/tile.png');
+  background-image:url('/assets/images/open_70x70.png');
   background-position:center;
 }
 
 .fountain {
-  background-image:url('/assets/images/water.png');
+  background-image:url('/assets/images/fountain_70x70.png');
   background-position:center;
-}
-
-.card {
-  background-color: white;
-  border:1px dotted grey;
-  font-weight:bold;
-  padding-left: .5em;
-  padding-right: .5em;
 }
 
 .card.goal {

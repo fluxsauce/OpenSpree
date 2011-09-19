@@ -49,11 +49,11 @@ class OpenSpree_Square {
   }
 
   public function removePlayerColor($player_color) {
-	  unset($this->_player_colors[$player_color]);
+    unset($this->_player_colors[$player_color]);
   }
 
   public function removeCarColor($car_color) {
-	  unset($this->_car_colors[$car_color]);
+    unset($this->_car_colors[$car_color]);
   }
 
   public function getPlayerColors() {
@@ -122,6 +122,13 @@ class OpenSpree_Square {
         $html .= '</div>';
       }
     }
+    if (isset($board_modifier['shoot'])) {
+      if (array_key_exists($this->_coordinates, $board_modifier['shoot'])) {
+        $html .= '<div class="action">';
+        $html .= '<a title="' . $this . '" href="?action=shoot&target=' . $board_modifier['shoot'][$this->_coordinates]['color'] . '"><strong>Shoot (' . $board_modifier['shoot'][$this->_coordinates]['distance'] . ')</strong></a>';
+        $html .= '</div>';
+      }
+    }
     if (isset($board_modifier['path'])) {
       if (array_key_exists($this->_coordinates, $board_modifier['path']) && $this->_coordinates != $board_modifier['player_coordinates']) {
         $html .= '<div class="previous_move">&otimes;</div>';
@@ -129,24 +136,25 @@ class OpenSpree_Square {
     }
     $card_is_goal = FALSE;
     if (isset($board_modifier['hand']) && ($this->_card instanceof OpenSpree_Card)) {
-    	foreach ($board_modifier['hand'] as $card) {
-    		if ($card->getNumber() == $this->_card->getNumber() && $card->getSuit() == $this->_card->getSuit()) {
-    			$card_is_goal = TRUE;
-    		}
-    	}
+      foreach ($board_modifier['hand'] as $card) {
+        if ($card->getNumber() == $this->_card->getNumber() && $card->getSuit() == $this->_card->getSuit()) {
+          $card_is_goal = TRUE;
+        }
+      }
     }
     if (!empty($this->_car_colors)) {
       foreach ($this->_car_colors as $car_color) {
-        $html .= '<img src="/assets/images/car_' . $car_color . '_40x21.png"/><br/>';
+        $html .= '<img width="40" height="21" src="/assets/images/car_' . $car_color . '_40x21.png"/><br/>';
       }
     }
     if (!empty($this->_player_colors)) {
       foreach ($this->_player_colors as $player_color) {
-        $html .= '<img src="/assets/images/sc_' . $player_color . '_30x30.png"/><br/>';
+      	$html .= OpenSpree_Design::playerAvatar($player_color, $board_modifier['players'][$player_color]->getKnockedDown()) . '<br/>';
       }
     }
-    // Coordinates
-    $html .= '<div style="font-size:8px;">' . $this . '</div>';
+    // Coordinates - debug
+    // $html .= '<div style="font-size:8px;">' . $this . '</div>';
+    // Card
     if ($this->_card instanceof OpenSpree_Card) {
       $html .= '<span class="card' . ($card_is_goal ? ' goal' : '') . '">' . $this->_card->toHtml() . '</span>';
     }
@@ -202,19 +210,61 @@ class OpenSpree_Square {
     $x = hexdec($this->_coordinates[0]);
     $y = hexdec($this->_coordinates[1]);
     $edges = array();
-    if (!$this->_walls[0]) {
+    // Fountain
+    if (($x == 6 || $x == 7) && $y == 4) {
+    	return $edges;
+    }
+    if (!$this->_walls[0] && !((6 == $x && 5 == $y) || (7 == $x && 5 == $y))) {
       $edges[] = array($this->toEdgeCoordinate(), $x . 'x' . ($y - 1));
     }
-    if (!$this->_walls[1]) {
+    if (!$this->_walls[1] && !(5 == $x && 4 == $y)) {
       $edges[] = array($this->toEdgeCoordinate(), ($x + 1) . 'x' .  $y);
     }
-    if (!$this->_walls[2]) {
+    if (!$this->_walls[2] && !((6 == $x && 3 == $y) || (7 == $x && 3 == $y))) {
       $edges[] = array($this->toEdgeCoordinate(), $x . 'x' .  ($y + 1));
     }
-    if (!$this->_walls[3]) {
+    if (!$this->_walls[3] && !(8 == $x && 4 == $y)) {
       $edges[] = array($this->toEdgeCoordinate(), ($x - 1) . 'x' .  $y);
     }
     return $edges;
+  }
+
+  public static function shootableSquareDistance($coordinate_source, $coordinate_target) {
+  	$x = hexdec($coordinate_source[0]);
+    $y = hexdec($coordinate_source[1]);
+    $a = hexdec($coordinate_target[0]);
+    $b = hexdec($coordinate_target[1]);
+    return sqrt(pow($x - $a, 2) + pow($y - $b, 2));
+  }
+
+  public static function convertAngleToDirection($angle) {
+  	switch ($angle) {
+  		case '0': {
+  			return 0;
+  			break;
+  		}
+  		case '90': {
+  			return 1;
+  			break;
+  		}
+  		case '180': {
+  			return 2;
+  			break;
+  		}
+  		case '270': {
+  			return 3;
+  			break;
+  		}
+  	}
+  }
+
+  public static function calculateAngle($coordinate_source, $coordinate_target) {
+  	$x = hexdec($coordinate_source[0]);
+    $y = hexdec($coordinate_source[1]);
+    $a = hexdec($coordinate_target[0]);
+    $b = hexdec($coordinate_target[1]);
+
+    return ((rad2deg(atan2($y - $b, $x - $a)) + 270) % 360);
   }
 
 }

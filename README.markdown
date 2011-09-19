@@ -1,14 +1,12 @@
 # OpenSpree
 
-*OpenSpree* is an implementation of *[Spree!](http://cheapass.com/freegames/spree)*, a board game about looting a shopping mall.
+*OpenSpree* is a fairly complete hot-seat adaptation of *[Spree!](http://cheapass.com/freegames/spree)*, a board game about looting a shopping mall, implemented in object-oriented PHP and deployed to Orchestra.io.
 
-## Work in progress
+Some minor features and edge cases are missing, but the game is playable and winnable.
 
-OpenSpree is under active development; at this time, it is approximately 60% complete, but the interface nowhere near finished. It is not possible to complete a game yet.
+Keep checking back for new features like AI players, asynchronous play (less page loads), blood spatters, Hong Kong rules, new official custom art straight from the game designers, and more!
 
-For a more comprehensive breakdown of what needs to be done, see the docblock in index.php.
-
-## Description
+## Overview
 
 Springtime. Midnight. The Mall is beckoning.
 
@@ -22,9 +20,13 @@ So park your car, dash into the mall, and load up your little red wagon. You can
 
 This explains the guns.
 
-## Demo
+## Known issues
 
-A demonstration of OpenSpree has been deployed to http://openspree.orchestra.io/ 
+OpenSpree is under active development; at this time, a game is able to be completed, but stop cards have not yet been implemented.  In short, I need to figure out how to allow other players to have an opportuntity to interrupt an action without disclosing what cards they have, yet still obeying the rules of the game.  Artifical intelligence players won't have that problem.
+
+## Want to play?
+
+A playable copy of OpenSpree has been deployed to http://openspree.orchestra.io/ using the GitHub repository as the origin. 
 
 ## Requirements
 
@@ -34,7 +36,7 @@ Future versions may require an Apache web server.
 
 ## Contributed code
 
-* [PHP-Dijktra](https://github.com/kay/PHP-Dijkstra) by doug@neverfear.org is an implementaiton of Dijkstra's shortest path-algorithm. 
+* [PHP-Dijktra](https://github.com/kay/PHP-Dijkstra) by doug@neverfear.org is an implementation of Dijkstra's shortest path-algorithm. 
 
 ## Contributing
 

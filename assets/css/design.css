@@ -8,6 +8,11 @@
   margin-bottom: .5em;
 }
 
+.msg a {
+  color: black;
+  font-weight: bold;
+}
+
 .msg .heading {
   font-weight: bold;
   padding-bottom: .3em;
@@ -41,4 +46,19 @@
   background: url('/assets/images/messages/info_30x30.png') no-repeat scroll 10px 10px #E0CCE0;
   border: 1px solid #660066;
   box-shadow: 2px 2px 3px #290029;
+}
+
+.card {
+  display: inline;
+  padding-left: .5em;
+  margin-left: .1em;
+  margin-right: .1em;
+  padding-right: .5em;
+  width: 1.5em;
+  font-weight:bold;
+  border:1px solid grey;
+  text-align: center;
+  -moz-border-radius: .2em;
+  border-radius: .2em;
+  background-color: white;
 }

@@ -67,8 +67,8 @@ class OpenSpree_Board {
     $this->squares['33'] = new OpenSpree_Square('shop', '33', new OpenSpree_Card('5', 'H'), array(FALSE, FALSE, FALSE, FALSE));
     $this->squares['43'] = new OpenSpree_Square('shop', '43', new OpenSpree_Card('2', 'H'), array(FALSE, FALSE, FALSE, FALSE));
     $this->squares['53'] = new OpenSpree_Square('open', '53', NULL, array(FALSE, FALSE, FALSE, FALSE));
-    $this->squares['63'] = new OpenSpree_Square('open', '63', NULL, array(FALSE, FALSE, TRUE, FALSE));
-    $this->squares['73'] = new OpenSpree_Square('open', '73', NULL, array(FALSE, FALSE, TRUE, FALSE));
+    $this->squares['63'] = new OpenSpree_Square('open', '63', NULL, array(FALSE, FALSE, FALSE, FALSE));
+    $this->squares['73'] = new OpenSpree_Square('open', '73', NULL, array(FALSE, FALSE, FALSE, FALSE));
     $this->squares['83'] = new OpenSpree_Square('open', '83', NULL, array(FALSE, FALSE, FALSE, FALSE));
     $this->squares['93'] = new OpenSpree_Square('shop', '93', new OpenSpree_Card('2', 'S'), array(FALSE, FALSE, FALSE, FALSE));
     $this->squares['a3'] = new OpenSpree_Square('shop', 'a3', new OpenSpree_Card('5', 'S'), array(FALSE, FALSE, FALSE, FALSE));
@@ -81,10 +81,10 @@ class OpenSpree_Board {
     $this->squares['24'] = new OpenSpree_Square('open', '24', NULL, array(TRUE, FALSE, TRUE, FALSE));
     $this->squares['34'] = new OpenSpree_Square('open', '34', NULL, array(FALSE, FALSE, FALSE, FALSE));
     $this->squares['44'] = new OpenSpree_Square('open', '44', NULL, array(FALSE, FALSE, FALSE, FALSE));
-    $this->squares['54'] = new OpenSpree_Square('open', '54', NULL, array(FALSE, TRUE, FALSE, FALSE));
-    $this->squares['64'] = new OpenSpree_Square('fountain', '64', NULL, array(TRUE, TRUE, TRUE, TRUE));
-    $this->squares['74'] = new OpenSpree_Square('fountain', '74', NULL, array(TRUE, TRUE, TRUE, TRUE));
-    $this->squares['84'] = new OpenSpree_Square('open', '84', NULL, array(FALSE, FALSE, FALSE, TRUE));
+    $this->squares['54'] = new OpenSpree_Square('open', '54', NULL, array(FALSE, FALSE, FALSE, FALSE));
+    $this->squares['64'] = new OpenSpree_Square('fountain', '64', NULL, array(FALSE, FALSE, FALSE, FALSE));
+    $this->squares['74'] = new OpenSpree_Square('fountain', '74', NULL, array(FALSE, FALSE, FALSE, FALSE));
+    $this->squares['84'] = new OpenSpree_Square('open', '84', NULL, array(FALSE, FALSE, FALSE, FALSE));
     $this->squares['94'] = new OpenSpree_Square('open', '94', NULL, array(FALSE, FALSE, FALSE, FALSE));
     $this->squares['a4'] = new OpenSpree_Square('open', 'a4', NULL, array(FALSE, FALSE, FALSE, FALSE));
     $this->squares['b4'] = new OpenSpree_Square('open', 'b4', NULL, array(TRUE, FALSE, TRUE, FALSE));
@@ -97,8 +97,8 @@ class OpenSpree_Board {
     $this->squares['35'] = new OpenSpree_Square('shop', '35', new OpenSpree_Card('5', 'C'), array(FALSE, FALSE, FALSE, FALSE));
     $this->squares['45'] = new OpenSpree_Square('shop', '45', new OpenSpree_Card('2', 'C'), array(FALSE, FALSE, FALSE, FALSE));
     $this->squares['55'] = new OpenSpree_Square('open', '55', NULL, array(FALSE, FALSE, FALSE, FALSE));
-    $this->squares['65'] = new OpenSpree_Square('open', '65', NULL, array(TRUE, FALSE, FALSE, FALSE));
-    $this->squares['75'] = new OpenSpree_Square('open', '75', NULL, array(TRUE, FALSE, FALSE, FALSE));
+    $this->squares['65'] = new OpenSpree_Square('open', '65', NULL, array(FALSE, FALSE, FALSE, FALSE));
+    $this->squares['75'] = new OpenSpree_Square('open', '75', NULL, array(FALSE, FALSE, FALSE, FALSE));
     $this->squares['85'] = new OpenSpree_Square('open', '85', NULL, array(FALSE, FALSE, FALSE, FALSE));
     $this->squares['95'] = new OpenSpree_Square('shop', '95', new OpenSpree_Card('2', 'D'), array(FALSE, FALSE, FALSE, FALSE));
     $this->squares['a5'] = new OpenSpree_Square('shop', 'a5', new OpenSpree_Card('5', 'D'), array(FALSE, FALSE, FALSE, FALSE));

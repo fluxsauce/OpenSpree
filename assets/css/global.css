@@ -3,7 +3,19 @@
 body {
   font-family: Georgia, Verdana, Arial, serif;
   margin: 1em;
-  background: url('/assets/images/noise_bg.png') repeat #FFF;
+  background: url('/assets/images/green_bg.png') repeat #FFF;
+}
+
+.group:before,
+.group:after {
+    content:"";
+    display:table;
+}
+.group:after {
+    clear:both;
+}
+.group {
+    zoom:1; /* For IE 6/7 (trigger hasLayout) */
 }
 
 .rounded {
@@ -24,22 +36,69 @@ body {
   text-align: center;
 }
 
-#heading, #footer {
-  background: #000;
+#heading {
+  width: 100%;
+  margin-top: 0;
+  margin-left: 0;
+  margin-right: 0;
+  margin-bottom: 1em;
+  padding-top: 0;
+  padding-left: 1em;
+  padding-right: 1em;
+  padding-bottom; 0;
+}
+
+#heading .logo {
+  text-align; left;
+  width:252px;
+  vertical-align: middle;
+}
+
+#heading .description {
+  width: 400px;
+  font-size: 110%;
+  text-align: center;
+  border-right: 1px dotted gray;
+  border-left: 1px dotted gray;
+  padding-left: 1.5em;
+  padding-right: 1.5em;
+  vertical-align: middle;
+}
+
+#heading .description a {
+  color: black;
+  font-weight: bold;
+}
+
+#heading .fluxsauce {
+  width: 206px;
+  text-align: right;
+  vertical-align: middle;
+}
+
+#description a {
+  color: black;
+}
+
+#footer {
   padding: 1em 0 1em 1em;
   margin: 1em 0;
+}
+
+#heading, #footer {
+  background: url('/assets/images/noise_bg.png') repeat #FFF;
 }
 #heading h1 {
   position: relative;
   margin: 0;
-  color: #fff;
+  color: #000;
   width: 40%;
 }
 #heading p, #footer p {
-  color: #b7b7b7;
+  color: #4A4A4A;
 }
 #heading p {
-  margin: 10px 0 0;
+  margin: 0;
 }
 #footer p {
   margin-top: 0;
@@ -54,5 +113,5 @@ body {
 
 #heading p a, #footer p a {
   font-weight:bold;
-  color:#CCCCCC;
+  color: black;
 }

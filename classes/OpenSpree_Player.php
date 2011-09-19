@@ -21,7 +21,7 @@ class OpenSpree_Player {
   private $_knocked_down = FALSE;
 
   public function __construct($color, $name) {
-  	if (!OpenSpree_Game::isValidColor($color)) {
+    if (!OpenSpree_Game::isValidColor($color)) {
       throw new Exception('Invalid color; cannot construct player.');
     }
     $this->_color = $color;
@@ -35,11 +35,16 @@ class OpenSpree_Player {
     return $this->_knocked_down;
   }
 
+  public function getScore() {
+  	return $this->_score;
+  }
+
   public function updateScore() {
     $score = 0;
     if (!empty($this->_safe_cards)) {
       foreach ($this->_safe_cards as $card) {
         switch ($card->getNumber()) {
+        	case '2':
           case '3':
           case '4':
           case '5':
@@ -71,12 +76,16 @@ class OpenSpree_Player {
     $this->_score = $score;
   }
 
-  public function setKnockedDown(boolean $knocked_down) {
+  public function setKnockedDown($knocked_down) {
     $this->_knocked_down = $knocked_down;
   }
 
+  public function getKnockedDown() {
+    return $this->_knocked_down;
+  }
+
   public function __toString() {
-  	// This isn't actually a string.  Well, it is, but it's not plain text.
+    // This isn't actually a string.  Well, it is, but it's not plain text.
     $html = '<dl>';
     $html .= '<dt style="color:' . $this->_color . ';">' . $this->_name . '</dt>';
     $hand = array();
@@ -140,11 +149,11 @@ class OpenSpree_Player {
   }
 
   public function putCardInCart(OpenSpree_Card $card) {
-  	$this->_shopping_cart[$card->getSuit() . $card->getNumber()] = $card;
+    $this->_shopping_cart[$card->getSuit() . $card->getNumber()] = $card;
   }
 
   public function takeCardFromCart(OpenSpree_Card $card) {
-  	unset ($this->_shopping_cart[$card->getSuit() . $card->getNumber()]);
+    unset ($this->_shopping_cart[$card->getSuit() . $card->getNumber()]);
   }
 
   public function stashCart() {
@@ -159,7 +168,7 @@ class OpenSpree_Player {
   }
 
   public function getShoppingCart() {
-  	return $this->_shopping_cart;
+    return $this->_shopping_cart;
   }
 
 }

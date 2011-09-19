@@ -42,18 +42,34 @@ class OpenSpree_Turn {
     return $this->_id;
   }
 
+  public function setPlayerShot($boolean) {
+  	$this->_player_shot = $boolean;
+  }
+
+  public function getPlayerShot() {
+  	return $this->_player_shot;
+  }
+
+  public function setPlayerEarnedAnotherTurn($boolean) {
+  	$this->_player_earned_another_turn = $boolean;
+  }
+
+  public function getPlayerEarnedAnotherTurn() {
+  	return $this->_player_earned_another_turn;
+  }
+
   function __toString() {
-  	$debug_string = 'Turn #' . $this->_id . ', ' . $this->_player_color . ' player.';
-  	$debug_string .= ' Player ' . ($this->hasPlayerRolled() ? 'has' : 'has not') . ' rolled.';
-  	if ($this->hasPlayerRolled()) {
-  		$debug_string .= ' Player rolled ' . $this->_player_roll . ' with ' . $this->_player_roll_modifier . ' modifier.';
-  	}
-  	if ($this->_player_move_distance > 0) {
-  	  $debug_string .= ' Player move distance: ' . $this->_player_move_distance . '. ';
-  	}
-  	if (!empty($this->_player_move_history)) {
-  	  $debug_string .= ' Player move history: ' . implode(', ', $this->_player_move_history) . '.';
-  	}
+    $debug_string = 'Turn #' . $this->_id . ', ' . $this->_player_color . ' player.';
+    $debug_string .= ' Player ' . ($this->hasPlayerRolled() ? 'has' : 'has not') . ' rolled.';
+    if ($this->hasPlayerRolled()) {
+      $debug_string .= ' Player rolled ' . $this->_player_roll . ' with ' . $this->_player_roll_modifier . ' modifier.';
+    }
+    if ($this->_player_move_distance > 0) {
+      $debug_string .= ' Player move distance: ' . $this->_player_move_distance . '. ';
+    }
+    if (!empty($this->_player_move_history)) {
+      $debug_string .= ' Player move history: ' . implode(', ', $this->_player_move_history) . '.';
+    }
     return $debug_string;
   }
 
@@ -62,10 +78,10 @@ class OpenSpree_Turn {
   }
 
   public function addPlayerMove($coordinates) {
-  	foreach ($coordinates as $coordinate) {
-  		$this->_player_move_history[$coordinate] = $coordinate;
-  	}
-  	// Offset for initial square
+    foreach ($coordinates as $coordinate) {
+      $this->_player_move_history[$coordinate] = $coordinate;
+    }
+    // Offset for initial square
     $this->_player_move_distance += count($coordinates) - 1;
   }
 
@@ -78,7 +94,7 @@ class OpenSpree_Turn {
   }
 
   public function getPlayerRemainingMoves() {
-  	$remaining_move_count = ($this->_player_roll + $this->_player_roll_modifier) - $this->_player_move_distance;
+    $remaining_move_count = ($this->_player_roll + $this->_player_roll_modifier) - $this->_player_move_distance;
     return $remaining_move_count;
   }
 
@@ -95,15 +111,15 @@ class OpenSpree_Turn {
   }
 
   public function getPlayerMoveHistory() {
-  	return $this->_player_move_history;
+    return $this->_player_move_history;
   }
 
   public function setPlayerDrove($boolean) {
-  	$this->_player_drove = $boolean;
+    $this->_player_drove = $boolean;
   }
 
   public function getPlayerDrove($boolean) {
-  	return $this->_player_drove;
+    return $this->_player_drove;
   }
 
 }

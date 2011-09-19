@@ -1,0 +1,47 @@
+@CHARSET "ISO-8859-1";
+
+#control_panel {
+  border-spacing: 5px;
+  width: 100%;
+  
+}
+
+#control_panel td {
+  background: url('/assets/images/noise_bg.png') repeat #FFF;
+  padding: .5em;
+  vertical-align: top;
+}
+
+#control_panel td h2 {
+  margin-top: 0;
+  margin-bottom: .5em;
+  border-bottom: 1px dotted gray;
+}
+
+#player_info {
+  width: 350px;
+}
+
+.other_player {
+  width: 30%;
+  text-align: right;
+}
+
+.action_button {
+  background-color: white;
+  border: 1px solid grey;
+  -moz-border-radius: .2em;
+  border-radius: .2em;
+  padding: .2em;
+  margin: .3em;
+  text-align: center;
+}
+
+.action_button:hover {
+  background-color: #E8FAE8;
+}
+
+.action_button a {
+  color: black;
+  text-underline; none;
+}
