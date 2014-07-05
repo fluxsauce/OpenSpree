@@ -1,6 +1,6 @@
 # OpenSpree
 
-*OpenSpree* is a fairly complete hot-seat adaptation of *[Spree!](http://cheapass.com/freegames/spree)*, a board game about looting a shopping mall, implemented in object-oriented PHP and deployed to Orchestra.io.
+*OpenSpree* is a fairly complete hot-seat adaptation of *[Spree!](http://cheapass.com/freegames/spree)*, a board game about looting a shopping mall, implemented in object-oriented PHP.
 
 Some minor features and edge cases are missing, but the game is playable and winnable.
 
@@ -26,7 +26,7 @@ OpenSpree is under active development; at this time, a game is able to be comple
 
 ## Want to play?
 
-A playable copy of OpenSpree has been deployed to http://openspree.orchestra.io/ using the GitHub repository as the origin. 
+A playable copy of OpenSpree has been deployed to http://openspree.fluxsauce.com/ using the GitHub repository as the origin. 
 
 ## Requirements
 
